@@ -1,9 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import DashboardView from '@/components/DashboardView.vue'
+import TermsView from '@/components/TermsView.vue'
 
-export default createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+export const router = createRouter({
+  history: createWebHistory(),
   routes: [
-    { path: '/', component: () => import('@/views/HomeView.vue') },
-    { path: '/about', component: () => import('@/views/AboutView.vue') },
+    { path: '/', name: 'dashboard', component: DashboardView, meta: { title: 'Pogoda365 — prognoza pogody' } },
+    { path: '/regulamin', name: 'terms', component: TermsView, meta: { title: 'Regulamin — Pogoda365' } },
+    { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
+  scrollBehavior: () => ({ top: 0 }),
+})
+
+router.afterEach((to) => {
+  document.title = typeof to.meta.title === 'string' ? to.meta.title : 'Pogoda365'
 })

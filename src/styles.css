@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  :root.dark {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-w-[320px] bg-ink-50 font-sans text-ink-800 antialiased dark:bg-ink-900 dark:text-ink-100;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-skybrand-500 ring-offset-2 ring-offset-white dark:ring-offset-ink-900;
+  }
+}
+
+@layer components {
+  .surface {
+    @apply rounded-2xl border border-ink-200/70 bg-white/85 shadow-soft backdrop-blur-xl dark:border-ink-700/70 dark:bg-ink-800/85;
+  }
+
+  .control {
+    @apply min-h-11 rounded-xl border border-ink-200 bg-white px-3 text-sm text-ink-800 transition-colors placeholder:text-ink-400 hover:border-ink-300 focus:border-skybrand-500 focus:outline-none focus:ring-2 focus:ring-skybrand-500/20 dark:border-ink-700 dark:bg-ink-800 dark:text-white dark:hover:border-ink-600;
+  }
+
+  .button-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-skybrand-600 px-4 text-sm font-semibold text-white transition-colors hover:bg-skybrand-700 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .button-muted {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-ink-200 bg-ink-50 px-4 text-sm font-semibold text-ink-700 transition-colors hover:bg-ink-100 dark:border-ink-700 dark:bg-ink-800 dark:text-ink-200 dark:hover:bg-ink-700;
+  }
+
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    @apply sr-only;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.12) 25%, rgba(148, 163, 184, 0.28) 50%, rgba(148, 163, 184, 0.12) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
